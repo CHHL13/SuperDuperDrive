@@ -17,11 +17,11 @@ CREATE TABLE IF NOT EXISTS NOTES (
 
 CREATE TABLE IF NOT EXISTS FILES (
     fileId INT PRIMARY KEY auto_increment,
-    filename VARCHAR,
-    contenttype VARCHAR,
-    filesize VARCHAR,
+    fileName VARCHAR,
+    contentType VARCHAR,
+    fileSize VARCHAR,
     userid INT,
-    filedata BLOB,
+    fileData BLOB,
     foreign key (userid) references USERS(userid)
 );
 
