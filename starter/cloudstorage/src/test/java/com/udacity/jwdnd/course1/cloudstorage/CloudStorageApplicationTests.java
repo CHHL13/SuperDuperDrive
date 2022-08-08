@@ -21,6 +21,8 @@ class CloudStorageApplicationTests {
 
 	private WebDriver driver;
 
+	public String baseURL;
+
 	@BeforeAll
 	static void beforeAll() {
 		WebDriverManager.chromedriver().setup();
@@ -29,6 +31,7 @@ class CloudStorageApplicationTests {
 	@BeforeEach
 	public void beforeEach() {
 		this.driver = new ChromeDriver();
+		baseURL = "http://localhost:" + port;
 	}
 
 	@AfterEach
