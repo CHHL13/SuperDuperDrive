@@ -11,13 +11,11 @@ import java.io.IOException;
 @Service
 public class FileService {
 
-    private TimeStampService timeStampService;
     private final FileMapper fileMapper;
 
 
-    public FileService(FileMapper fileMapper, TimeStampService timeStampService) {
+    public FileService(FileMapper fileMapper) {
         this.fileMapper = fileMapper;
-        this.timeStampService = timeStampService;
     }
 
     public String[] getFileList(Integer userId) {
