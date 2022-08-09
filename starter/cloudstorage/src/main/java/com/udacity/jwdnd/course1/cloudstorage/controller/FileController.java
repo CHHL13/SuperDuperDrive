@@ -31,7 +31,7 @@ public class FileController {
         User user = userService.getUser(userName);
 
         MultipartFile multipartFile = fileForm.getFile();
-        if(multipartFile.isEmpty() || fileService.addFile(multipartFile, user) <= 0) {
+        if(multipartFile.isEmpty() || fileService.isFileNameDuplicate(user.getUserId(), multipartFile) || fileService.addFile(multipartFile, user) <= 0) {
             model.addAttribute("isSuccess", "changeError");
         } else {
             model.addAttribute("isSuccess", "changeSuccess");

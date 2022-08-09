@@ -24,9 +24,7 @@ public class CredentialService {
         for(int i = 0; i < credentials.length; i++) {
             Credential credential = credentials[i];
 
-            String decryptedPassword = encryptionService.decryptValue(credential.getPassword(), credential.getKey());
-
-            credentialForms[i] = new CredentialForm(credential.getCredentialId().toString(), credential.getUrl(), credential.getUsername(), decryptedPassword);
+            credentialForms[i] = new CredentialForm(credential.getCredentialId().toString(), credential.getUrl(), credential.getUsername(), credential.getPassword(), credential.getKey());
         }
 
         return credentialForms;

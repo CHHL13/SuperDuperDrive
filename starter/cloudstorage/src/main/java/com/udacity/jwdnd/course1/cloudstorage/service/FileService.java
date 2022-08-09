@@ -31,24 +31,13 @@ public class FileService {
         Integer userId = user.getUserId();
         byte[] fileData = multipartFile.getBytes();
 
-        if(isFileNameDuplicate(userId, fileName)) {
-            int lastDotIndex = fileName.lastIndexOf('.');
-            if(lastDotIndex != -1) {
-                fileName = fileName.substring(0, lastDotIndex ) + "-" + timeStampService.getCurrentTimeStamp()
-                        + fileName.substring(lastDotIndex);
-            } else {
-                fileName = fileName + "-" + timeStampService.getCurrentTimeStamp();
-            }
-
-        }
-
         File file = new File(0, fileName, contentType, fileSize, userId, fileData);
 
         return fileMapper.insert(file);
     }
 
-    private boolean isFileNameDuplicate(Integer userId, String fileName) {
-        return fileMapper.getFileByFileName(userId, fileName) != null;
+    public boolean isFileNameDuplicate(Integer userId, MultipartFile multipartFile) {
+        return fileMapper.getFileByFileName(userId, multipartFile.getOriginalFilename()) != null;
     }
 
     public File getFile(Integer userId, String fileName) {

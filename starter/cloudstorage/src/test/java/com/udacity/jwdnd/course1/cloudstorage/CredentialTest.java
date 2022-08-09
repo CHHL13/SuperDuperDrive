@@ -83,7 +83,7 @@ public class CredentialTest {
 
         Assertions.assertEquals(url, credential.getUrl());
         Assertions.assertEquals(username, credential.getUsername());
-        Assertions.assertEquals(password, credential.getPassword());
+        Assertions.assertNotEquals(password, credential.getPassword());
 
         homePage.deleteCredential();
     }
@@ -109,6 +109,10 @@ public class CredentialTest {
         homePage = new HomePage(this.driver);
         homePage.goToCredentialTab();
 
+        String decryptedPassword = homePage.getDecryptedPassword();
+
+        Assertions.assertEquals(password, decryptedPassword);
+
 
         url = "www.4399.com";
         username = "player1";
@@ -132,7 +136,7 @@ public class CredentialTest {
 
         Assertions.assertEquals(url, credential.getUrl());
         Assertions.assertEquals(username, credential.getUsername());
-        Assertions.assertEquals(password, credential.getPassword());
+        Assertions.assertNotEquals(password, credential.getPassword());
 
         homePage.deleteCredential();
     }

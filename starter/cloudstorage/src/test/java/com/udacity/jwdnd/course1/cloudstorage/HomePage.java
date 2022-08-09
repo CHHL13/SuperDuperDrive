@@ -86,6 +86,12 @@ public class HomePage {
     @FindBy(id = "credentialDelete")
     private WebElement credentialDelete;
 
+    @FindBy(id = "credentialModalClose")
+    private WebElement credentialModalClose;
+
+    @FindBy(id = "credentialModalPassword")
+    private WebElement credentialModalPassword;
+
     private WebDriverWait wait;
 
 
@@ -184,6 +190,13 @@ public class HomePage {
             return false;
         }
 
+    }
+
+    public String getDecryptedPassword() {
+        wait.until(ExpectedConditions.elementToBeClickable(this.credentialEdit)).click();
+        String decryptedPassword = wait.until(ExpectedConditions.elementToBeClickable(this.credentialPassword)).getAttribute("value");
+        wait.until(ExpectedConditions.elementToBeClickable(this.credentialModalClose)).click();
+        return decryptedPassword;
     }
 
 }

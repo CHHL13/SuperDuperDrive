@@ -140,7 +140,7 @@
                                 <tr th:each="credential : ${credentialList}">
                                     <td>
                                         <button type="button" class="btn btn-success"
-                                                th:attr="data-id=${credential.credentialId}, data-url=${credential.url}, data-name=${credential.username}, data-password=${credential.password}"
+                                                th:attr="data-id=${credential.credentialId}, data-url=${credential.url}, data-name=${credential.username}, data-password=${encryptionService.decryptValue(credential.password, credential.key)}"
                                                 th:onclick="showCredentialModal(this.getAttribute('data-id'), this.getAttribute('data-url'), this.getAttribute('data-name'), this.getAttribute('data-password'));" id="credentialEdit">Edit</button>
                                         <a th:href="@{/credential/delete/{credentialId}(credentialId = ${credential.credentialId})}" class="btn btn-danger" id="credentialDelete">Delete</a>
                                     </td>
@@ -172,7 +172,7 @@
                                                 <label for="credential-username" class="col-form-label">Username</label>
                                                 <input type="text" name= "username" class="form-control" id="credential-username" maxlength="30" required th:field="*{username}">
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" id="credentialModalPassword">
                                                 <label for="credential-password" class="col-form-label">Password</label>
                                                 <input type="text" name= "password" class="form-control" id="credential-password" maxlength="30" required th:field="*{password}">
                                             </div>
@@ -180,7 +180,7 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="credentialModalClose">Close</button>
                                         <button type="button" class="btn btn-primary" onclick="$('#credentialSubmit').click();" id="credentialSaveChanges">Save changes</button>
                                     </div>
                                 </div>
